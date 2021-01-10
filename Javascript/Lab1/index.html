@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript</title>
+        <script>
+
+            // // problem 1 
+            // // user will enter his name
+            // var username = prompt("Enter Username:");
+            
+            // // user will enter his password 
+            // var password = prompt("Enter Password:");
+            
+            // // if user "admin" and password "421$$" show him a welcome message 
+            // // else let user know which data is wrong!
+            // if (username==="admin" && password === "421$$") {
+            //     alert("Welcome login success!");
+            // } else if (username !== "admin" && password !== "421$$") {
+            //     alert("Username and password are incorrect"); 
+            // } else if (username !== "admin") {
+            //     alert("Incorrect username!");
+            // } else {
+            //     alert("Incorrect password!");
+            // }
+
+
+            // =============================================================== 
+            
+            // problem 2
+
+            // initial declarations
+            var result;
+
+            // user will enter the first number 
+            // Assign it directly to result
+            var result = Number(prompt("Enter the first number:"));
+
+            do {
+                // then enter an operation (sum, multiple, sub, div, mod)
+                var operation = prompt("Enter the operation:"); 
+                
+                // then enter the next number
+                var nextNum = Number(prompt("Enter the next number:"));
+
+                // do the math          
+                switch(operation) {
+                    case "sum":
+                        result += nextNum;
+                        break;
+                    case "multi":
+                        result *= nextNum;
+                        break;
+                    case "sub":
+                        result -= nextNum;
+                        break;
+                    case "div":
+                        result /= nextNum;
+                        break;
+                    case "mod":
+                        result %= nextNum;
+                }
+
+                // Show the result
+                alert("Result is: " + result);
+
+            } while(true); // and so on 
+                
+        </script>
+    </head>
+    <body>
+        Javascript is easy
+    </body>
+</html>
