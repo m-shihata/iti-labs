@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JS/Lab2/Problem2</title>
+        <style>
+            table, tr, th, td {
+                border: 2px solid gray;
+                border-collapse: collapse;
+                font-size: 22px;
+                text-align: center;
+            }
+
+            table {
+                width: 600px;
+                margin-bottom: 20px;
+            }
+
+            td {
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body onload="displayContacts()">
+        <h1>Phonebook</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+            </tbody>
+        </table>
+        <input type="text" id="name" name="name" value="" placeholder="Name" />
+        <input type="text" id="number" name="number" value="" placeholder="Phone Number" />
+        <button id="addBtn" style="display: inline;" onclick="addContact()">Add</button>
+        <button id="saveBtn" style="display: none;" onclick="saveUpdatedContact()">save</button>
+
+        <script>
+            // Problem 2
+            // Create Phonebook app
+
+            var contacts = [
+                {
+                    "name": "ahmed",
+                    "number": "0123456789"
+                },
+                {
+                    "name": "ali",
+                    "number": "0100000000"
+                },
+            ];
+            
+            // Selctors
+            var nameInput = document.querySelector('#name');
+            var numberInput = document.querySelector('#number');
+            var addBtn = document.querySelector('#addBtn');
+            var saveBtn = document.querySelector('#saveBtn');
+
+            // flags
+            var editIndex;
+
+            // function1: Returns added contacts as table rows  
+            function displayContacts() {
+                var str = '';
+                // create row for each contact and add it to the string
+                for (var i=0; i<contacts.length; i++) {
+                    str += `
+                        <tr>
+                            <td>${contacts[i].name}</td>
+                            <td>${contacts[i].number}</td>
+                            <td>
+                                <button onclick="deleteContact(${i})">Delete</button>
+                                <button onclick="editContact(${i})">Edit</button>
+                                <button onclick="callPerson(${i})">Call</button>
+                            </td>
+                        </tr>
+                    `
+                }
+                document.querySelector('#contacts').innerHTML = str;
+            }
+
+            // function2: Add contact to the list
+            function addContact() {
+                var contact = {
+                    name: nameInput.value, 
+                    number: numberInput.value
+                }
+                contacts.push(contact); // Add contact to the list
+                displayContacts();      // Update the user
+                clearInputs();          // Clear the inputs
+            }
+
+            // Function3: Deletes contact from the list
+            function deleteContact(index) {
+                contacts.splice(index, 1); // Delete contact
+                displayContacts();         // Update the user
+                clearInputs();             // Clear the inputs
+                showAddBtn();              // After deletion user must hit edit again 
+            }
+
+            // Function4: Shows the edit mode to the user with a contact to edit
+            function editContact(index) {
+                // Show contact to edit in the inputs
+                nameInput.value = contacts[index].name;
+                numberInput.value = contacts[index].number;
+                
+                editIndex = index; // set index to save the updated contact at
+                showSaveBtn();     // Show save button and hide add button
+            }
+
+            // Function5: save the updates
+            function saveUpdatedContact() {
+                contacts[editIndex].name = nameInput.value;
+                contacts[editIndex].number = numberInput.value;
+                displayContacts(); // Update the user
+                clearInputs();     // Clear the inputs
+                showAddBtn();      // Show add button and hide save button
+            }
+
+            // Function 6
+            function callPerson(index) {
+                window.open(`tel:${contacts[index].number}`)
+            }
+
+
+            // helper functions
+            // Function 1: clear inputs after adding contact to the list
+            function clearInputs() {
+                nameInput.value = '';
+                numberInput.value = '';
+            }
+
+            // function 2: Shows save button and hide add button
+            function showSaveBtn() {
+                addBtn.setAttribute('style', 'display:none;');
+                saveBtn.setAttribute('style', 'display:inline;');
+            }
+            // function 3: do the opposite of hleper function 2 
+            function showAddBtn() {
+                addBtn.setAttribute('style', 'display:inline;');
+                saveBtn.setAttribute('style', 'display:none;');
+            }
+
+        </script>
+    </body>
+</html>

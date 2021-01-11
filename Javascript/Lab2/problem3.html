@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JS/Lab2/Problem3</title>
+        <script>
+            // Problem 3
+            // Area calculator
+
+            // initial declarations 
+            var r, b, h, a, l, w, b;
+            var area;
+
+            // Ask user which shape 
+            do {
+                var shape = prompt("Which shape you want to calculate the area for?");
+
+                switch(shape) {
+                    case 'circle':
+                        area = circleArea();
+                    break;
+                    case 'triangle':
+                        area = traingleArea();
+                    break;
+                    case 'square':
+                        area = squareArea();
+                    break;
+                    case 'rectangle':
+                        area = rectangleArea();
+                    break;
+                    case 'parallelogram':
+                        area = parallelogramArea();
+                    break;
+                    case 'trapezium':
+                        area = squareArea();
+                    break;
+                    case 'ellipse':
+                        area = ellipseArea();
+                }
+
+                alert(`${shape} Area = ${area}`);
+            } while (true)
+            // Area functions
+            function circleArea() {
+                r = Number(prompt('Enter the radius'));
+                return 3.14 * r * r;
+            }
+
+            function traingleArea() {
+                b = Number(prompt('Enter the base'));
+                h = Number(prompt('Enter the height'));
+                return .5 * b * h;
+            }
+
+            function squareArea() {
+                a = Number(prompt('Enter the length of the side'));
+                return a * a;
+            }
+
+            function rectangleArea() {
+                l = Number(prompt('Enter the length'));
+                w = Number(prompt('Enter the width'));
+                return l * w;
+            }
+
+            function traingleArea() {
+                b = Number(prompt('Enter the base'));
+                h = Number(prompt('Enter the height'));
+                return .5 * b * h;
+            }
+
+            function parallelogramArea() {
+                b = Number(prompt('Enter the base'));
+                h = Number(prompt('Enter the height'));
+                return b * h;
+            }
+
+            function trapeziumArea() {
+                a = Number(prompt('Enter a parallel side'));
+                b = Number(prompt('Enter the other parallel side'));
+                h = Number(prompt('Enter the height'));
+                return (.5 * (a+b)) * h;
+            }
+
+            function ellipseArea() {
+                a = Number(prompt('Enter the minor axis'));
+                b = Number(prompt('Enter the major axis'));
+
+                return 3.14 * .25 * a * b;
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

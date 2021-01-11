@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JS/Lab2/Problem1</title>
+        <script>
+            // Problem 1
+            // simple jss app calculates sum and average using prompt
+
+            // initial declarations 
+            var num = 0, numArr = [], sum = 0, avg = 0;
+
+            // Ask the user to enter how many number he wants to get the sum of
+            num = Number(prompt('How many numbers you want to get the total sum of?'));
+
+            // Save the entered numbers in array
+            for (var i = 0; i < num; i++) {
+                var ordNum = i + 1 + (['st','nd','rd'][((i+91)%100-10)%10-1] || 'th');
+                numArr.push(Number(prompt(`Enter ${ordNum} number:`)));
+            }
+            
+            // Calculate the total sum and the average
+            for (var i=0; i<numArr.length; i++) {sum += numArr[i];}
+            avg = sum / num;
+            
+            // Return the values of the total sum and the value
+            alert(`Sum = ${sum} \n Avg. = ${avg}`)
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
