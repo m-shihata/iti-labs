@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JS/Lab3/Problem1</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body id="loginApp" onload="load('app')">
+        <!-- Problem 2 -->
+        <!-- Simple login page -->
+        <div id="login-form" class="center">
+            <form id="logiForm">
+                <div>
+                    <input 
+                    type="text" name="username" id="username"    
+                    class="form-control-1" placeholder="Username"
+                    >
+                </div>
+                <div>
+                    <input 
+                    type="password" name="password" id="password"    
+                    class="form-control-1" placeholder="Password"
+                    >
+                </div>
+                <div>
+                    <button onclick="submitForm()" class="form-control-1 btn-1">Login</button>
+                </div>
+                <p class="text-center">Not Registered? <a class="form-link" href="#">Create an account</a></p>
+            </form>
+        </div>
+        <h1 id="msg" class="center"></h1>
+        <script>
+            var username = document.querySelector("#username");
+            var password = document.querySelector("#password");
+            var form = document.querySelector("#login-form");
+            var msg = document.querySelector("#msg");
+
+            function submitForm() {
+                event.preventDefault();
+                if (username.value === "admin" && password.value === "123")
+                    load("error", "Success Login :)");
+                else if (username.value !== "admin" && password.value !== "123")
+                    load("error", "Username and password are incorrect!")
+                
+                else if (username.value !== "admin")
+                    load("error", "Username is incorrect!")
+                
+                else
+                    load("error", "Password is incorrect!")
+                
+            }
+
+            function load(page, str) {
+                console.log(page, str)
+                switch (page) {
+                    case "app": {
+                        form.style.display = "block";
+                        msg.style.display = "none";     
+                    }
+                    break;
+                    case "error": {
+                        form.style.display = "none";
+                        msg.innerHTML = str;
+                        msg.style.display = "block";
+                    }
+                    break;
+                }
+            }
+        </script>
+    </body>
+</html>

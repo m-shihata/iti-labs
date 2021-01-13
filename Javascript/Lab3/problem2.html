@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JS/Lab3/Problem2</title>
+        <link rel="stylesheet" href="styles.css" /> 
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    </head>
+    <body id="todoApp" onload="displayTodos()">
+        <div id="box" class="center">
+            <table>
+                <tbody id="todos">
+                </tbody>
+            </table>
+            <div class="text-center">
+                <input id="todo" class="form-control-2" type="text" name="todo" value="" placeholder="Add Task here" />
+                <button id="addBtn" class="form-control-2 btn-2" style="display: inline;" onclick="addTodo()">Add</button>
+            </div>
+        </div>
+        <script>
+            // Problem 2
+            // Create TODO app
+            var todos = [
+                {
+                    todo: "Call Ahmed",
+                    status: true
+                },
+                {
+                    todo: "Do the bonus",
+                    status: false
+                },
+            ];
+            
+            // Selctors
+            var todoInput = document.querySelector('#todo');
+            var addBtn = document.querySelector('#addBtn');
+
+
+            // function1: Returns added todos as table rows  
+            function displayTodos() {
+                var str = '';
+                // create row for each todo and add it to the string
+                for (var i=0; i<todos.length; i++) {
+                    console.log(todos[i].status)
+                    str += `
+                        <tr>
+                            <td class="w-90"><span class=" ${todos[i].status ? '': 'checked'}">${todos[i].todo}</span></td>
+                            <td class="text-end">
+                                <button class="btn-2" onclick="checkTodo(${i})"><i class="far fa-check-square"></i></button>
+                                <button class="btn-2" onclick="deleteTodo(${i})"><i class="far fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                    `
+                }
+                document.querySelector('#todos').innerHTML = str;
+            }
+
+
+            // function2: Add todo to the list
+            function addTodo() {
+                var todo = {
+                    todo: todoInput.value, 
+                    status: true
+                }
+                todos.push(todo);       // Add todo to the list
+                displayTodos();         // Update the user
+                todoInput.value = '';   // Clear the inputs
+            }
+
+
+            // Function3: Delete todo from the list
+            function deleteTodo(index) {
+                todos.splice(index, 1); // Delete todo
+                displayTodos();         // Update the user
+            }
+
+
+            // Function4: Mark todo as done
+            function checkTodo(index) {
+                todos[index].status = !todos[index].status;
+                displayTodos();    // Update the user
+            }
+
+        </script>
+    </body>
+</html>
