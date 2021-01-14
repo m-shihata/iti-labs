@@ -51,16 +51,15 @@
 
             // function validate the form and return if form is valid, what to load and msg to inject
             function validateForm() {
+                // check againist username not empty
                 if (username.value === "")
                     return {
                         isValid: false,
                         toLoad: "err1",
                         msg: "User name can't be empty!"
                     }
-
+                // check againist password number, capital, small, > 8 
                 var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
-                         
-
                 if (!password.value.match(re))
                     return {
                             isValid: false,
