@@ -1,0 +1,215 @@
+<!Doctype html>
+<html lang="en" class="h-100 d-flex justify-content-center align-items-center">
+    <head>
+        <title>Timer</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/73176406ef.js" crossorigin="anonymous"></script>
+        <style>
+            input[type="number"], input[type="number"]::placeholder {   
+                    text-align: center; 
+            } 
+
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button {  
+                -webkit-appearance: none;
+                opacity: 0;
+            }
+        </style>
+    </head>
+    <body class="d-flex flex-column align-items-center p-4">
+        <h1 class="display-1">Timer</h1>
+        <h2 class="display-2 d-flex"><span id="hr"></span>:<span id="min"></span>:<span id="sec" style="width: 90px;"></span></h2>
+        <div class="d-flex justify-content-between" style="width: 320px;">            
+            <input id="hours" class="form-control form-control-sm" style="width: 100px;" type="number" placeholder="Hours" autocomplete="off"  min="0" oninput="validity.valid||(value='');">
+            <input id="minutes" class="form-control form-control-sm" style="width: 100px;" type="number" placeholder="Minutes" autocomplete="off"  min="0" max="60" oninput="validity.valid||(value='');">
+            <input id="seconds" class="form-control form-control-sm" style="width: 100px;" type="number" placeholder="Seconds" autocomplete="off" min="0" max="60" oninput="validity.valid||(value='');"> 
+        </div>
+        <div class="d-flex mt-4" >
+            <button id="start" class="btn btn-success shadow-sm mr-2">Start</button>
+            <button id="pause" class="counter btn btn-warning shadow-sm mr-2">pause</button>
+            <button id="reset" class="counter btn btn-danger shadow-sm mr-2">Reset</button>
+            <button id="volume" class="counter btn btn-secondary shadow-sm" style="width: 50px;"><i class="fas fa-volume-up"></i></button>
+            <button id="mute" class="counter btn btn-secondary shadow-sm" style="display:none; width: 50px;"><i class="fas fa-volume-mute"></i></button> 
+        </div> 
+        <audio id="sound">
+            <source src="https://ia801509.us.archive.org/17/items/timer_20200520/timer.mp3" type="audio/mpeg">
+        </audio>
+        <a class="small text-muted mt-4 " href="https://muhammadshihata.github.io/Learning-JS/">Back to index</a>
+        <p>Note: This is one of my old projects</p>
+    </body>
+    <script>
+
+        // Globals
+        let Hours, Minutes, Seconds, Hr, Min, Sec, Play, Pause, Reset, Volume, Mute, Sound; // Selectors 
+        let hours, minutes, seconds; // Variables
+        let interval, soundInterval; // Intervals
+        let pause = true, sound = true; // Default state
+
+
+        // Wait for content to be loaded
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // To make DOM selection easier
+            Hours = document.querySelector('#hours');
+            Minutes = document.querySelector('#minutes');
+            Seconds =document.querySelector('#seconds');
+            Hr = document.querySelector('#hr');
+            Min = document.querySelector('#min');
+            Sec =document.querySelector('#sec');
+            Start =document.querySelector('#start');
+            Pause =document.querySelector('#pause');
+            Reset =document.querySelector('#reset');
+            Volume = document.querySelector("#volume");
+            Mute = document.querySelector("#mute");
+            Sound = document.querySelector("#sound");
+
+            // set a default values 
+            reset(5);
+
+            // Event listeners 
+            Start.addEventListener('click', () => {
+
+                if (!interval) {
+                    getInputs();
+                    clearInputs();
+                };
+                
+                if (pause) // pause means not play and vice versa 
+                    interval = setInterval(timer, 1000);
+
+                if (pause)
+                    pause = false; 
+                    
+            });
+
+
+            Pause.addEventListener('click', () => {
+                
+                if (!pause) 
+                    clearInterval(interval);
+                    pause = true;
+        
+            });
+
+
+            Reset.addEventListener('click', () => {
+                reset(5);
+                stopAudio();
+            });
+
+        
+            Volume.addEventListener('click', () =>{
+                
+                // if sound is on stop it 
+                stopAudio();
+
+                // change sound state 
+                sound = false; 
+
+                // Swich buttons 
+                Volume.style.display = 'none';
+                Mute.style.display = '';
+            });
+
+
+            Mute.addEventListener('click', () =>{
+
+                // change sound state 
+                sound = true;
+
+                // Switch buttons 
+                Volume.style.display = '';
+                Mute.style.display = 'none';
+
+            });
+
+        });
+
+
+        function getInputs() {
+
+            // Get the provided values 
+            hours = Hours.value;
+            minutes = Minutes.value;
+            seconds = Seconds.value;
+
+            // Set any missing value = zero
+            hours = !hours  || hours < 0 ? 0 : hours;
+            minutes = !minutes || minutes < 0 ? 0 : minutes;
+            seconds = !seconds  || seconds < 0 ? 0 : seconds;
+
+        };
+
+
+        function clearInputs() {
+
+            Hours.value ='';
+            Minutes.value ='';
+            Seconds.value ='';
+
+        };
+
+  
+        function timer() {
+
+            // Timer basic algorithm  
+            if (seconds != 0) {
+                seconds--;
+            } else if (seconds == 0 && minutes != 0) {
+                minutes--;
+                seconds = 59;
+            } else if (minutes == 0 && hours != 0) {
+                hours--;
+                minutes = 59;
+                seconds= 59;
+            } else {
+                reset(0);
+                if (sound) 
+                    soundInterval = setInterval(playAudio, 1000);
+                    setTimeout(stopAudio, 60000);
+            };
+
+            // Show the change for the user
+            Hr.innerHTML = hours > 9 ? hours : '0' + hours;
+            Min.innerHTML = minutes > 9 ? minutes : '0' + minutes;
+            Sec.innerHTML = seconds > 9 ? seconds : '0' + seconds; 
+            
+        };
+
+
+        function reset(n) {
+            
+            if (interval)
+                clearInterval(interval);
+                interval = undefined;
+
+            pause = true;
+
+            Hours.value = 0;
+            Minutes.value = n;
+            Seconds.value = 0;
+
+            Hr.innerHTML = '00';
+            Min.innerHTML = '0'+n;
+            Sec.innerHTML = '00';
+
+            stopAudio();
+
+        };
+
+
+        function playAudio() {
+            Sound.play();
+        };
+
+
+        function stopAudio() { 
+            if (soundInterval) 
+                clearInterval(soundInterval);
+                soundInterval = undefined;
+        };
+
+    </script>
+</html>
