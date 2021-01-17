@@ -86,11 +86,9 @@
 
 
             Pause.addEventListener('click', () => {
-                
                 if (!pause) 
                     clearInterval(interval);
                     pause = true;
-        
             });
 
 
@@ -144,16 +142,13 @@
 
 
         function clearInputs() {
-
             Hours.value ='';
             Minutes.value ='';
             Seconds.value ='';
-
         };
 
   
         function timer() {
-
             // Timer basic algorithm  
             if (seconds != 0) {
                 seconds--;
@@ -174,13 +169,11 @@
             // Show the change for the user
             Hr.innerHTML = hours > 9 ? hours : '0' + hours;
             Min.innerHTML = minutes > 9 ? minutes : '0' + minutes;
-            Sec.innerHTML = seconds > 9 ? seconds : '0' + seconds; 
-            
+            Sec.innerHTML = seconds > 9 ? seconds : '0' + seconds;    
         };
 
 
         function reset(n) {
-            
             if (interval)
                 clearInterval(interval);
                 interval = undefined;
@@ -196,7 +189,6 @@
             Sec.innerHTML = '00';
 
             stopAudio();
-
         };
 
 

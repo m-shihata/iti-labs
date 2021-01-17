@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JS/Lab5/Problem1</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body id="loginApp" onload="load('app')">
+        <!-- Problem 1 -->
+        <!-- login page fetching data -->
+        <div id="login-form" class="center">
+            <form method="POST" onsubmit="submitForm(event)">
+                <div>
+                    <input 
+                    type="text" name="username" id="username"    
+                    class="form-control-1" placeholder="Username" autofocus
+                    >
+                    <div id="err1"></div>
+                </div>
+                <div>
+                    <input 
+                    type="password" name="password" id="password"    
+                    class="form-control-1" placeholder="Password" 
+                    >
+                    <div id="err2"></div>
+                </div>
+                <div>
+                    <input type="submit" class="form-control-1 btn-1" />
+                </div>
+                <p class="text-center">Not Registered? <a class="form-link" href="#">Create an account</a></p>
+            </form>
+        </div>
+        <h1 id="msg" class="center"></h1>
+
+        <script>
+            // elements
+            var username = document.querySelector("#username");
+            var password = document.querySelector("#password");
+            var form = document.querySelector("#login-form");
+            var msg = document.querySelector("#msg");
+            var err1 = document.querySelector("#err1");
+            var err2 = document.querySelector("#err2");
+
+
+            // function to submit the form only if valid 
+            function submitForm(e) {
+
+                // prevent form from being submitted
+                e.preventDefault();
+
+                // clear old error
+                err1.innerHTML = ""
+                err2.innerHTML = ""
+                
+                // Check if username is empty
+                if (username.vaule === "")
+                    load("err1", "Missing email or username!")
+               
+                else {
+                    fetch("https://reqres.in/api/login", {
+                        method: "post",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "email": username.value,
+                            "password": password.value
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.token){
+                            load("success", "Success login :)");
+                        }
+                        else if (data.error === "Missing password")
+                            load("err2", data.error);
+                        else
+                            load("err1", data.error)
+                    })
+                    .catch(console.log);
+                }    
+            }
+
+
+            // function to take the action loading another page or inject msgs
+            function load(page, str) {
+                console.log(page, str)
+                switch (page) {
+                    case "app": {
+                        form.style.display = "block";
+                        msg.style.display = "none";     
+                    }
+                    break;
+                    case "success": {
+                        form.style.display = "none";
+                        msg.innerHTML = str;
+                        msg.style.display = "block";
+                    }
+                    break;
+                    case "err1": {
+                        
+                        err1.innerHTML =  str;
+                        err1.style.color = "red";
+                    }
+                    break;
+                    case "err2": {
+                        err2.innerHTML =  str;
+                        err2.style.color = "red";
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
