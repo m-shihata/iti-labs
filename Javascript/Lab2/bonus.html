@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bonus/Calculator</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            body {
+                background-color: cornflowerblue;
+            }
+
+            table {
+                width: 300px;
+                border-radius: 20px;
+                background-color: white;
+                padding: 10px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            tbody tr:first-child td {
+                margin-top: 10px;
+            }
+
+            tbody td {
+                background-color: ghostwhite;
+            }
+            
+            thead td {
+                height: 75px;
+            }
+
+            tbody td {
+                text-align: center;
+                width:25%;
+                height: 75px;
+            }
+
+            #scrTop {
+                font-size: xx-large;
+            }
+
+            #scrBtm {
+                font-size: large;
+            }
+
+        </style>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <td id="scrTop" colspan="4"></td>
+                </tr>
+                <tr>
+                    <td id="scrBtm" colspan="4"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>c</td>
+                    <td>+/-</td>
+                    <td>%</td>
+                    <td>/</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>*</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>+</td>
+                </tr>
+                <tr>
+                    <td colspan="2">0</td>
+                    <td>.</td>
+                    <td>=</td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            // String to evaluate
+            let str = ''
+            let lastNum = ''
+            let lastOper = ''
+
+            // Elements
+            btns = document.querySelectorAll('td');
+            scrBtm = document.querySelector('#scrBtm');
+            scrTop = document.querySelector('#scrTop');
+
+            // Iterate over buttons and add the content to the string
+            btns.forEach(btn => {
+
+                btn.addEventListener('click', (e) => {
+                    // which btn?
+                    const btn = e.target.innerHTML;
+                    console.log(btn)
+
+                    // c -> reset everything
+                    if (btn === 'c' ){
+                        str = '';
+                        lastOper = '';
+                        lastNum = '';
+                        scrTop.innerHTML = '';
+                        scrBtm.innerHTML = '';
+                    }
+
+                    // -/+ -> change the last number sign
+                    else if (btn === '+/-') {
+                        if (lastNum !== '')
+                            str = str.substring(0, str.lastIndexOf(lastNum));
+                            str += `(-${lastNum})`;
+                    }
+
+                    // Normal operator %, /, *, -, +
+                    else if (btn === '%' || btn === '/' || btn ==='*' || btn === '-' || btn === '+') {
+                        lastNum = '';
+                        lastOper = btn;
+                        str += btn;
+                    }
+                    
+                    // = -> show the result 
+                    else if (btn === '=') {
+                        console.log(str)
+                        result = eval(str);
+                        scrTop.innerHTML = result;
+                    }
+
+                    // Number -> add it to the string
+                    else {
+                        lastNum += btn;
+                        str += btn;
+                        scrBtm.innerHTML = str;
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
