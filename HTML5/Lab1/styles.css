@@ -76,8 +76,14 @@ h2 {
 
 input {
     width: 100%;
+}
+
+form > div {
     margin-top: 10px;
 }
 
+label {
+    font-size: small;
+}
 
     
