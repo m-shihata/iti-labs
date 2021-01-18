@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+/* problem 1 */
+header {
+    position: fixed;
+    top: 0;
+    height: 10%;
+    width: 100%;
+    background-color: firebrick;
+    text-align: center;
+}
+
+nav {
+    position: fixed;
+    top: 10%;
+    left: 0;
+    height: 100vh;
+    width: 20%;
+    background-color: yellowgreen;
+    color: black;
+    text-align: center;
+
+}
+
+article {
+    position: fixed;
+    height: 80%;
+    width: 80%;
+    top: 10%;
+    left: 20%;
+    text-align: center;
+    background-color: sandybrown;
+    
+}
+
+footer {
+    position: fixed;
+    left: 20%;
+    bottom: 0;
+    height: 10%;
+    width: 80%;
+    background-color: green;
+}
+
+h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    vertical-align: middle;
+    margin: 0;
+    color: white;
+    font-size: 25px;
+}
+
+/* porblem 2 */
+
+form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+}
+
+h2 {
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+    

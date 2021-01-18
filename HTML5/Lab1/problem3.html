@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML5/Lab1/Problem1</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h3>You have visited this page <span id="visitsCounter"></span></h3>
+    </body>
+    <script>
+        visitsCounter = document.querySelector('#visitsCounter');
+
+        if (!localStorage.visitsCounter) {
+            localStorage.visitsCounter = 1;
+            visitsCounter.innerHTML = localStorage.visitsCounter;
+        } else {
+            localStorage.visitsCounter++;
+            visitsCounter.innerHTML = localStorage.visitsCounter;
+        }
+    </script>
+</html>
