@@ -9,8 +9,8 @@ const data = {
         title: 'Trailer of some Netflix cartoon',
         type: 'Series',
         listID: '1',
-        allowedAge: '+12',
-        cats: ['Action', 'Adventure', 'Sci-Fiction'] 
+        allowedAge: 'All',
+        cats: ['Cartoon', 'Adventure', 'Comedy'] 
     },
 }
 

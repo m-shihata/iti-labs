@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cats = document.querySelector('#cats');
     const subtitles = document.querySelector('#subtitles');
     const seekbarContWidth = seekbarCont.clientWidth;
+    const playPauseBtn = document.querySelector('#palyPauseBtn');
+
     const volumeRange = document.querySelector('#volumeRange');
 
     // Set volume to be .5 by default
@@ -67,7 +69,16 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     // Make volume Range sync with actual video voluem
     video.addEventListener('volumechange', () => {
-        volumeRange.value = video.volume * 10;
+        const vol = video.volume * 10
+        volumeRange.value = vol;
+       
+        if(vol === 0) {
+            muteUnmuteBtn.childNodes[0].setAttribute('class', 'fas fa-volume-mute')
+        } else if(vol > 0 && vol < 5) {        
+            muteUnmuteBtn.childNodes[0].setAttribute('class', 'fas fa-volume-down')
+        } else {
+            muteUnmuteBtn.childNodes[0].setAttribute('class', 'fas fa-volume-up')
+        }    
     });
 
     // Handle subtitles and last current time save
@@ -114,10 +125,14 @@ function loadMeta(meta) {
 
 // Play/Pause
 function playPause() {
-    if (video.paused)
+    if (video.paused) {
         video.play();
-    else
+        playPauseBtn.childNodes[0].setAttribute('class', 'fas fa-pause');
+    }
+    else {
         video.pause();
+        playPauseBtn.childNodes[0].setAttribute('class', 'fas fa-play');
+    }
 }
 
 // Forward 10 seconds
@@ -150,8 +165,12 @@ function volumeEqual(e) {
 
 // Mute / Unmute
 function muteUnmute() {
-    if (video.volume !== 0) setVolume(0);
-    else setVolume(v);
+    if (video.volume !== 0) {
+        setVolume(0);
+    }
+    else {
+        setVolume(v);
+    } 
 }
 
 // set volume

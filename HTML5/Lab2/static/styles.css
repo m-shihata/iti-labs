@@ -24,11 +24,15 @@ body {
 
 #ctrlsTop {
     position: absolute;
-    top: 0;
+    top: 5%;
     left: 50%;
     transform: translate(-50%, 0);
     width: 90%;
     color: white;
+}
+
+#title {
+    display: none;
 }
 
 #ctrlsMdl {
@@ -41,21 +45,31 @@ body {
 #subtitlesCont {
     position: absolute;
     left: 50%;
-    top: 75%;
+    bottom: 10%;
     transform: translate(-50%, -50%);
     color: white;
     font-size: large;
 }
 
-#subtitles {
+#catsCont, #subtitles {
     padding: 10px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+#catsCont {
+    border-left: 5px solid red;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+#allowedAge {
+    font-size: large;
+}
+
 #seekbarCont {
     position: absolute;
-    bottom: 15%;
+    bottom: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     height: 5px;
@@ -68,16 +82,12 @@ body {
     position: absolute;
     left: 5%;
     bottom: 0;
-    transform: translate(0, -50%);
-    width: 45%;
 }
 
 #ctrlsBtmRight{
     position: absolute;
     right: 5%;
     bottom: 0;
-    transform: translate(0, -50%);
-    width: 45%;
     text-align: end;
 }
 
@@ -101,22 +111,19 @@ body {
 #ctrlBtns {
     position: relative;
     width: 100%;
-
 }
 
 
 #volumeRange {
     width: 80px;
-    transform: rotate(-0deg); 
-    /* will rotated -90 later */
+    /* transform: rotate(-90deg);  */
     position: 
 }
 
-
-
 .controlBtn {
     color:white;
-    height: 60px;
+    height: 50px;
+    width: 50px;
     background-color: transparent;
     opacity: 0.5;
     border: none;
@@ -141,26 +148,9 @@ input:focus, button:focus {
     outline: none;
 }
 
-/* input[type=range]::-ms-thumb {
-    background-color: red;
+#backwartTenBtn {
+    transform: scale(1, -1);
 }
-
-input[type=range]::-webkit-slider-runnable-track {
-    background-color: black;
-    border-radius: 3px;
-} */
-
-/* input[type=range]::-moz-range-track  {
-    background: red;
-}
-
-input[type=range]::-ms-thumb {
-    border: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: goldenrod;
-} */
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     input[type='range'] {

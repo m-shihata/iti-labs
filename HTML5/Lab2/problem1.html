@@ -3,6 +3,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>HTML5/Lab2/Poroblem1</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
         <link rel="stylesheet" href="static/styles.css" />
         <script src="static/data.js"></script>
         <script src="static/script.js"></script>
@@ -11,7 +12,7 @@
         <div id="player">
             <video id="video"></video>
             <div id="ctrlsTop">
-                <div id="catsParent">
+                <div id="catsCont">
                     <div id ="allowedAge"></div>
                     <div id="cats"></div>
                 </div>
@@ -26,22 +27,22 @@
                 <div id="seekbarDot"></div>
             </div> 
             <div id="ctrlsBtmLeft">
-                        <button id="playPauseBtn" class="controlBtn" data-f="playPause">play/pause</button>
-                        <button id="backwardTenBtn" class="controlBtn" data-f="backwardTen">&Lt; -10</button>
-                        <button id="forwardTenBtn" class="controlBtn" data-f="forwardTen">+10 &Gt;</button>
-                        <button id="muteUnmuteBtn" class="controlBtn" data-f="muteUnmute">mute/unmute</button>
+                        <button id="playPauseBtn" class="controlBtn" data-f="playPause"><i class="fas fa-play"></i></button>
+                        <button id="backwardTenBtn" class="controlBtn" data-f="backwardTen"><i class="fas fa-backward"></i></button>
+                        <button id="forwardTenBtn" class="controlBtn" data-f="forwardTen"><i class="fas fa-forward"></i></button>
+                        <button id="muteUnmuteBtn" class="controlBtn" data-f="muteUnmute"><i class="fas fa-volume-up"></i></button>
                         <input 
-                        id= "volumeRange" class="controlRange" type="range" 
-                        data-f="volumeEqual" min="0" max="10" step="1" aria-disabled=""
+                            id= "volumeRange" class="controlRange" type="range" 
+                            data-f="volumeEqual" min="0" max="10" step="1" aria-disabled=""
                         />
             </div>
             <div id="ctrlsBtmRight">
 
                 <input 
-                id= "speedRange" class="controlRange" type="range" 
-                data-f="speedEqual" min=".5" max="1.5" step=".25" aria-disabled=""
+                    id= "speedRange" class="controlRange" type="range" 
+                    data-f="speedEqual" min=".5" max="1.5" step=".25" aria-disabled=""
                 />
-                <button id="fullScreenBtn" class="controlBtn" data-f="fullScreen">Full screen</button>
+                <button id="fullScreenBtn" class="controlBtn" data-f="fullScreen"><i class="fas fa-expand"></i></button>
                 
             </div>  
         </div>
