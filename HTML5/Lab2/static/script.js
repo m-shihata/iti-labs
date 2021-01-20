@@ -13,12 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const cats = document.querySelector('#cats');
     const subtitles = document.querySelector('#subtitles');
     const seekbarContWidth = seekbarCont.clientWidth;
+    const seekbarThumb = document.querySelector('#seekbarThumb')
     const playPauseBtn = document.querySelector('#palyPauseBtn');
 
     const volumeRange = document.querySelector('#volumeRange');
 
-    // Set volume to be .5 by default
+    // Set default settings 
     video.volume = .5; 
+    video.currentTime = localStorage[`video${data.meta.id}`]
 
     // Fetch for the data with ID -> will be right here
     // Only after the fetch is done load this functions ...
@@ -67,17 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
     video.addEventListener('click', () => {
         playPause();
     })
+    
     // Make volume Range sync with actual video voluem
     video.addEventListener('volumechange', () => {
-        const vol = video.volume * 10
+        const vol = video.volume * 10;
+        const volIcon = muteUnmuteBtn.childNodes[0];  
         volumeRange.value = vol;
-       
         if(vol === 0) {
-            muteUnmuteBtn.childNodes[0].setAttribute('class', 'fas fa-volume-mute')
+            volIcon.setAttribute('class', 'fas fa-volume-mute')
         } else if(vol > 0 && vol < 5) {        
-            muteUnmuteBtn.childNodes[0].setAttribute('class', 'fas fa-volume-down')
+            volIcon.setAttribute('class', 'fas fa-volume-down')
         } else {
-            muteUnmuteBtn.childNodes[0].setAttribute('class', 'fas fa-volume-up')
+            volIcon.setAttribute('class', 'fas fa-volume-up')
         }    
     });
 
@@ -94,8 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sub.length > 0) {
             subtitles.innerHTML = sub[0].content;
         }
-        // sync seekbar with current time
-        seekbar.style.width = (video.currentTime / video.duration) * seekbarContWidth;
+
+        // sync seekbar and thumb with current time
+        const x = (video.currentTime / video.duration) * seekbarContWidth
+        seekbarUpper.style.width = x;
+        seekbarThumb.style.left = x;
     })
 
     seekbarCont.addEventListener("click",function(e){
