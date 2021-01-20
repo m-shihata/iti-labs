@@ -1,0 +1,85 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery/Lab1/Problem1</title>
+    <script src="jquery-3.5.1.min.js" ></script>
+    <script src="app1.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0px;
+            padding: 0px;
+        } 
+
+        #imgSlider {
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+            width: 800px;
+            background-color: black;
+            margin: auto;
+            margin-top: 100px;
+            border-radius: 30px;
+        }
+
+        #allImgsWrapper {
+            position: absolute;
+            left: 0;
+            width: 2500px; /* image width * images arr lenght + 100px */
+            height: 400px;
+        }
+
+        .imgWrapper {
+            overflow: hidden;
+            width: 800px;
+            display: inline-block;
+        }
+
+        img {
+            height: 400px;
+        }  
+
+        button {
+            color: gray;
+            font-size: xx-large;
+            border: none;
+            background-color: white;
+            outline: none;
+            opacity: .3;
+            width: 50px;
+            height: 400px;
+        }
+
+        button:hover {
+            opacity: .7;
+            transform: scale(2);
+            transition-duration: 0.5s;
+        }
+
+        #prev {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translate(0, -50%);
+        }
+        #next {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translate(0, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="imgSlider">
+        <div id="allImgsWrapper"></div>
+        <button id="prev"><i class="fas fa-chevron-left"></i></button>
+        <button id="next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+</body>
+</html>
