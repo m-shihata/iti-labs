@@ -1,0 +1,301 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+ul.nav {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+    background-color: #333;
+    position: relative;
+}
+
+li.nav-link {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+}
+
+li.nav-link:hover {
+    background-color: firebrick;
+}
+
+li.nav-link {
+    float: left;
+    cursor: pointer;
+}
+
+ul ul>li {
+    list-style:square;
+    position: absolute;
+    display: block;
+}
+
+.droplist li{
+    background-color: gray;
+}
+
+
+
+
+/* slider */
+
+#imgSlider {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+    width: 800px;
+    background-color: black;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 30px;
+}
+
+#allImgsWrapper {
+    position: absolute;
+    left: 0;
+    width: 2500px; /* image width * images arr lenght + 100px */
+    height: 400px;
+}
+
+.imgWrapper {
+    overflow: hidden;
+    width: 800px;
+    display: inline-block;
+}
+
+img {
+    height: 400px;
+}  
+
+#prev, #next {
+    color: gray;
+    font-size: xx-large;
+    border: none;
+    background-color: white;
+    outline: none;
+    opacity: .3;
+    width: 50px;
+    height: 400px;
+}
+
+#prev:hover, #next:hover {
+    opacity: .7;
+    transition-duration: 0.5s;
+}
+
+#prev {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+}
+
+#next {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+}
+
+/* player */
+/* Layout  */
+#player {
+    position: relative;
+    height: 100vh;
+    background-color: black;
+}
+
+#video {
+    position: absolute;
+    top: 0; 
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 100%;
+    width: 100%;
+}
+
+#ctrlsTop {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 90%;
+    color: white;
+}
+
+#ctrlsMdl {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#subtitlesCont {
+    position: absolute;
+    left: 50%;
+    bottom: 80px;
+    transform: translate(-50%, 0);
+    color: white;
+}
+
+#seekbarCont {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 7px;
+    width: 100%;
+    background-color: black;
+    width: 90%;
+}
+
+#ctrlsBtmLeft{
+    position: absolute;
+    left: 5%;
+    bottom: 0;
+}
+
+#ctrlsBtmRight{
+    position: absolute;
+    right: 5%;
+    bottom: 0;
+    text-align: end;
+}
+
+
+/* Top controls chlidrens */
+#catsCont, #subtitles {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#catsCont {
+    border-left: 5px solid red;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+#allowedAge {
+    font-size: large;
+}
+
+#title {
+    display: none;
+}
+
+
+/* Seekbar */
+#seekbarUpper {
+    position: absolute;
+    top: 50%;
+    height: 7px;
+    width: 0px;
+    background: red;
+    display: inline-block;
+    transform: translate(0, -50%); 
+}
+
+#seekbarThumb {
+    position: absolute;
+    top: 50%;
+    height: 15px;
+    width: 15px;
+    background: red;
+    border-radius: 50%;
+    display: inline-block;
+    transform: translate(-100%, -50%); 
+}
+
+#volumeRange {
+    width: 80px;
+}
+
+#player .controlBtn {
+    color:white;
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    opacity: 0.8;
+    border: none;
+}
+
+#player .controlBtn:hover {
+    opacity: 1;
+    transform: scale(1.2);
+    transition-duration: 0.5s;
+}
+
+#player input, #player button {
+    font-size: large;
+    margin: 5px;
+}
+
+#player input:focus, #player button:focus {
+    outline: none;
+}
+
+
+/* Overwrite range input styles */
+input[type='range'] {
+    overflow: hidden;
+    width: 80px;
+    -webkit-appearance: none;
+    background-color: black;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+    height: 7px;
+    -webkit-appearance: none;
+    color: red;
+    margin-top: -1px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    width: 0px;
+    -webkit-appearance: none;
+    height: 8px;
+    cursor: pointer;
+    background: black;
+    box-shadow: -80px 0 0 80px red;
+}
+
+
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: red; 
+}
+input[type="range"]::-moz-range-track {  
+  background-color: black;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: red; 
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: black; 
+}
+
+
+/* forms */
+
+form {
+    width: 500px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+form input {
+    display: block;
+    width: 100%;
+}
+
+

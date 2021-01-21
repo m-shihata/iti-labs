@@ -1,0 +1,424 @@
+<div id="player">
+    <video id="video"></video>
+    <div id="ctrlsTop">
+        <div id="catsCont">
+            <div id ="allowedAge"></div>
+            <div id="cats"></div>
+        </div>
+        <div id="title"></div>
+    </div>
+    <div id="ctrlsMdl"></div> 
+    <div id="subtitlesCont">
+        <p id="subtitles"></p>
+    </div>        
+    <div id="seekbarCont">
+        <div id="seekbarUpper"></div>
+        <div id="seekbarThumb"></div>
+        <div id="seekbarLower"></div>
+    </div> 
+    <div id="ctrlsBtmLeft">
+                <button id="playPauseBtn" class="controlBtn" data-f="playPause"><i class="fas fa-play"></i></button>
+                <button id="backwardTenBtn" class="controlBtn" data-f="backwardTen"><i class="fas fa-backward"></i></button>
+                <button id="forwardTenBtn" class="controlBtn" data-f="forwardTen"><i class="fas fa-forward"></i></button>
+                <button id="muteUnmuteBtn" class="controlBtn" data-f="muteUnmute"><i class="fas fa-volume-up"></i></button>
+                <input 
+                    id= "volumeRange" class="controlRange" type="range" 
+                    data-f="volumeEqual" min="0" max="10" step="1" aria-disabled=""
+                />
+    </div>
+    <div id="ctrlsBtmRight">
+
+        <input 
+            id= "speedRange" class="controlRange" type="range" 
+            data-f="speedEqual" min=".5" max="1.5" step=".25" aria-disabled=""
+        />
+        <button id="fullScreenBtn" class="controlBtn" data-f="fullScreen"><i class="fas fa-expand"></i></button>
+        
+    </div>  
+</div>
+
+<script>
+    
+    var data = {
+        sources: [['https://ia801507.us.archive.org/3/items/trailer_20210119/trailer.mp4', 'video/mp4']],
+        audio: [['english', 'static/trailer-en.srt']],
+        subtitle: [['english', 'audio.mp3']],
+        default: {'audio': 'english', 'subtitles': 'english'},
+        meta: {
+            id: '1',
+            title: 'Trailer of some Netflix cartoon',
+            type: 'Series',
+            listID: '1',
+            allowedAge: 'All',
+            cats: ['Cartoon', 'Adventure', 'Comedy'] 
+        },
+    }
+
+    var subtitlesArr = [
+        {
+        "content": "Welcome back, friends.",
+        "end": 6673,
+        "index": 1,
+        "start": 4254
+        },
+        {
+        "content": "Why can\u2019t you just leave me alone?",
+        "end": 9176,
+        "index": 2,
+        "start": 7257
+        },
+        {
+        "content": "Bean, running from your mother\nis so last year.",
+        "end": 12179,
+        "index": 3,
+        "start": 9259
+        },
+        {
+        "content": "Elfo\u2019s more of a mother to me\nthan you.",
+        "end": 14264,
+        "index": 4,
+        "start": 12262
+        },
+        {
+        "content": "This ruins so many fantasies,",
+        "end": 16475,
+        "index": 5,
+        "start": 14348
+        },
+        {
+        "content": "but opens up so many new ones.",
+        "end": 18268,
+        "index": 6,
+        "start": 16558
+        },
+        {
+        "content": "Announcing the return\nof Princess Tiabeanie.",
+        "end": 22564,
+        "index": 7,
+        "start": 19603
+        },
+        {
+        "content": "Warning. She appears to be\nin a bit of a mood.",
+        "end": 25776,
+        "index": 8,
+        "start": 22648
+        },
+        {
+        "content": "Ow!",
+        "end": 26735,
+        "index": 9,
+        "start": 25859
+        },
+        {
+        "content": "There are people inside this castle\nwho want me dead.",
+        "end": 31573,
+        "index": 10,
+        "start": 28946
+        },
+        {
+        "content": "She is clearly a threat.",
+        "end": 33367,
+        "index": 11,
+        "start": 31657
+        },
+        {
+        "content": "Elfo and Luci\u00a0are all I have",
+        "end": 35244,
+        "index": 12,
+        "start": 33450
+        },
+        {
+        "content": "and that is not a deep bench.\nWe gotta get out of here.",
+        "end": 38288,
+        "index": 13,
+        "start": 35327
+        },
+        {
+        "content": "Damn it!",
+        "end": 45045,
+        "index": 14,
+        "start": 44002
+        },
+        {
+        "content": "Woah, Steamland.",
+        "end": 48215,
+        "index": 15,
+        "start": 47130
+        },
+        {
+        "content": "There\u2019s a power in Dreamland\nbeyond anything we have here.",
+        "end": 54054,
+        "index": 16,
+        "start": 50759
+        },
+        {
+        "content": "I\u2019m offering an alliance\nbetween magic and science.",
+        "end": 57933,
+        "index": 17,
+        "start": 55138
+        },
+        {
+        "content": "This is big. I really need\nsome time to drink about this.",
+        "end": 61812,
+        "index": 18,
+        "start": 58642
+        },
+        {
+        "content": "-You mean--\n-I know what I said.",
+        "end": 64314,
+        "index": 19,
+        "start": 62896
+        },
+        {
+        "content": "This is the sinister plot\nthat just keeps giving.",
+        "end": 74449,
+        "index": 20,
+        "start": 71655
+        },
+        {
+        "content": "So much gasping.",
+        "end": 77953,
+        "index": 21,
+        "start": 76785
+        },
+        {
+        "content": "Our queen.",
+        "end": 82124,
+        "index": 22,
+        "start": 80872
+        },
+        {
+        "content": "I know you can do this.",
+        "end": 84001,
+        "index": 23,
+        "start": 82874
+        },
+        {
+        "content": "Badass Bean is the Bean\nI wanna see right now.",
+        "end": 88046,
+        "index": 24,
+        "start": 85669
+        },
+        {
+        "content": "You\u2019re right. I am badass!",
+        "end": 91008,
+        "index": 25,
+        "start": 88839
+        },
+        {
+        "content": "What is this?\nOh, my God. Calm down.",
+        "end": 95304,
+        "index": 26,
+        "start": 92092
+        },
+        {
+        "content": "Oh, no, this is your life now.\nIt\u2019s forever!",
+        "end": 98890,
+        "index": 27,
+        "start": 95387
+        },
+        {
+        "content": "All right. I\u2019ll talk to you later.",
+        "end": 114448,
+        "index": 28,
+        "start": 112863
+        }
+    ]
+
+    // Global variable for the volume
+    var v = 5;
+
+    // Elements 
+    var player = document.querySelector('#player');
+    var video = document.querySelector('#video');
+    var title = document.querySelector('#title');
+    var allowedAge = document.querySelector('#allowedAge');
+    var cats = document.querySelector('#cats');
+    var subtitles = document.querySelector('#subtitles');
+    var seekbarContWidth = seekbarCont.clientWidth;
+    var seekbarThumb = document.querySelector('#seekbarThumb')
+    var seekbarUpper = document.querySelector('#seekbarUpper')
+    var playPauseBtn = document.querySelector('#playPauseBtn');
+
+    var volumeRange = document.querySelector('#volumeRange');
+
+    // Set default settings 
+    video.volume = .5; 
+    // video.currentTime = localStorage[`video${data.meta.id}`]
+
+    // Fetch for the data with ID -> will be right here
+    // Only after the fetch is done load this functions ...
+    // Append video sources -> form data.js
+    appendVideoSources(video, data.sources);
+
+    loadMeta(data.meta);        // load meta data
+    // loadDefaultSub();        // load the default subtitle track
+    // loadDefaultAudio();      // load the default audio track
+
+
+    // Set event listeners -> will be out of the fetch chain
+    // add eventListeners on all of the UI buttons
+    document.querySelectorAll('.controlBtn').forEach((el) => {
+        // function name of the button
+        var f = el.dataset.f;
+
+        // add event listner to the button to run his function
+        el.setAttribute('onclick', `${f}()`);
+    });
+
+
+    // add eventListeners on all of the UI Range Inputs
+    document.querySelectorAll('.controlRange').forEach((el) => {
+        // function name of the range input
+        var f = el.dataset.f;
+        // add event listner to the button to run his function
+        el.setAttribute('oninput', `${f}(event)`);
+    });
+    
+    // Keyboard event listeners
+    document.addEventListener('keyup', (e) => {
+        if(e.key==' '){
+            playPause();
+        } else if(e.key=='ArrowRight') {
+            forwardTen();
+        } else if(e.key=='ArrowLeft') {
+            backwardTen();
+        } else if(e.key=='ArrowUp') {
+            volumeUp();
+        } else if(e.key=='ArrowDown') {
+            volumeDown();
+        }
+    });
+
+    video.addEventListener('click', () => {
+        playPause();
+    })
+    
+    // Make volume Range sync with actual video voluem
+    video.addEventListener('volumechange', () => {
+        var vol = video.volume * 10;
+        var volIcon = muteUnmuteBtn.childNodes[0];  
+        volumeRange.value = vol;
+        if(vol === 0) {
+            volIcon.setAttribute('class', 'fas fa-volume-mute')
+        } else if(vol > 0 && vol < 5) {        
+            volIcon.setAttribute('class', 'fas fa-volume-down')
+        } else {
+            volIcon.setAttribute('class', 'fas fa-volume-up')
+        }    
+    });
+
+    // Handle subtitles and last current time save
+    video.addEventListener('timeupdate', (e) => {
+        // localStorage[`video${data.meta.id}`] = video.currentTime;
+    
+        // handle subtitles
+        var sub = subtitlesArr.filter( item =>
+                video.currentTime >= item.start/1000 &&
+                video.currentTime <= item.end/1000          // python script convert to ms
+        );
+
+        if (sub.length > 0) {
+            subtitles.innerHTML = sub[0].content;
+        }
+
+        // sync seekbar and thumb with current time
+        var x = (video.currentTime / video.duration) * seekbarContWidth
+        seekbarUpper.style.width = x;
+        seekbarThumb.style.left = x;
+    })
+
+    seekbarCont.addEventListener("click",function(e){
+        var whereToPercent = e.offsetX / seekbarContWidth;
+        video.currentTime = video.duration * whereToPercent;
+    });
+
+
+
+    // Append video sources 
+    function appendVideoSources(videoEl, sources) {
+        console.log("sources")
+        sources.forEach((src) => {
+            var source = document.createElement('source');
+            source.setAttribute('src', src[0]);
+            source.setAttribute('type', src[1]);
+            videoEl.appendChild(source);
+        });
+    } 
+
+    // load meta data in the UI like title / credits
+    function loadMeta(meta) {
+        title.innerHTML = meta.title;
+        allowedAge.innerHTML = meta.allowedAge;
+        cats.innerHTML = meta.cats.join(', ');
+    }
+
+    // Play/Pause
+    function playPause() {
+        if (video.paused) {
+            video.play();
+            playPauseBtn.childNodes[0].setAttribute('class', 'fas fa-pause');
+        }
+        else {
+            video.pause();
+            playPauseBtn.childNodes[0].setAttribute('class', 'fas fa-play');
+        }
+    }
+
+    // Forward 10 seconds
+    function forwardTen() {
+        video.currentTime += 10;
+    } 
+
+    // Backward 10 seconds
+    function backwardTen() {
+        video.currentTime -= 10;
+    } 
+
+    // Volume up 1/10 at a a time
+    function volumeUp() {
+        if (v < 10) v++;
+        setVolume(v);
+    }
+
+    // Volume down 1/10 at a time
+    function volumeDown() {   
+        if (v > 0) v--;
+        setVolume(v); 
+    }
+
+    // Set volume equal to value
+    function volumeEqual(e) {
+        v = e.target.value;
+        setVolume(v);
+    }
+
+    // Mute / Unmute
+    function muteUnmute() {
+        if (video.volume !== 0) {
+            setVolume(0);
+        }
+        else {
+            setVolume(v);
+        } 
+    }
+
+    // set volume
+    function setVolume(v) {
+        video.volume = v/10;
+        console.log('Volume', video.volume);
+    }
+
+    // full screen
+    function fullScreen() {
+        video.webkitEnterFullScreen();
+    }
+
+    // Control Speed 
+    function speedEqual(e) {
+        video.playbackRate = Number(e.target.value);
+    }
+
+</script>
+
+
