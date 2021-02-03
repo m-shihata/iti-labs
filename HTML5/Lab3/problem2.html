@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5/Lab3/Problem2</title>
+    <script>
+        let db = openDatabase("onlinestore","1.1","Online Store system v1",24*1024*1024);
+        db.transaction(function(tx){
+            tx.executeSql(
+                "create table if not exists items (id int primary key,name varchar(200), amount int)",
+                null,
+                function(tx,result){
+                    tx.executeSql("insert into items (id, name, amount) values (?,?,?)",[1,"T-Shirt", 57]);
+                    tx.executeSql("insert into items (id, name, amount) values (?,?,?)",[2,"Hoodies", 34]);
+                    tx.executeSql("insert into items (id, name, amount) values (?,?,?)",[3,"Pants", 20]);
+                },function(tx,error){
+                    console.log(error);
+                }
+            );
+        });
+    </script>
+</head>
+<body>
+    
+    
+</body>
+</html>

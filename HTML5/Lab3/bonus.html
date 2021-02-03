@@ -1,0 +1,86 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5/Lab3/Bonus</title>
+    <style>
+        .container {
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video, img {
+            width: 500px;
+            height: 400px;
+            background-color: #222;
+            margin-top: 10px;
+        }
+
+        img {
+            display: none;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+        canvas {
+            display: none;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <video autoplay="true"></video>
+        <div>
+            <button onclick="start();">Start</button>
+            <button onclick="stop();">Stop</button>
+            <button onclick="screenshot();">Take a photo</button>
+        </div>
+        <canvas></canvas>
+        <img />
+    </div>
+    <script>
+        const video = document.querySelector('video');
+        const canvas = document.querySelector('canvas');
+        const img = document.querySelector('img');
+
+        function start() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true, audio: false },)
+                .then((src) => {
+                    video.srcObject = src; 
+                });
+            }
+        }
+
+        function stop(e) {
+            const tracks = video.srcObject.getTracks();
+            tracks.forEach(track => { track.stop(); });
+            video.srcObject = null;
+        }
+
+        function screenshot() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext("2d");
+            context.drawImage(video, 0, 0);
+            img.src = canvas.toDataURL("image/webp");
+            img.style.display = 'inline';
+        };
+
+
+
+
+    </script>
+
+</body>
+
+</html>

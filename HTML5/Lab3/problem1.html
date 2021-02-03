@@ -1,0 +1,14 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5/Lab3/problem1</title>
+</head>
+<body>
+    <script>
+        navigator.geolocation.getCurrentPosition((position) => {
+            document.body.innerHTML = 'locaton is ' + position.coords.latitude + ', ' + position.coords.longitude
+        })
+    </script>
+</body>
+</html>
