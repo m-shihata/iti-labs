@@ -27,3 +27,5 @@ if __name__ == '__main__':
     print('\nShowing mgr1 data....')
     print('_____________________\n')
     Manager.show(1)
+
+# Drop the managers table manually before running this script 
