@@ -79,7 +79,7 @@ while True:
         elif option == 6:
             break
     except:
-        print("Something wrong with your")
+        print("Something wrong with your input/s!")
         continue
         
 
