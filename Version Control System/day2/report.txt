@@ -1,0 +1,58 @@
+report about the difference between 
+	1- rebase and merger
+ 
+		C1---C2-----C5---C6 (master) <= 
+      			|
+			---C3---C4 (feature)
+
+		$ git checkout feature
+
+		C1---C2----C5---C6 (master) 
+   		    	|
+        	    	---C3---C4 (feature) <= 
+
+	a- merge
+		$ git merge master
+
+		                 (master)
+		C1---C2----C5---C6-- 
+			|           |  
+        		--C3---C4-----C* (feature) <= 
+		
+		master keeps it's commits (C4, C5)  
+		feature branch will be updated with those commits as a new commit
+
+	b- rebase
+
+		$ git rebase master
+				|(master)
+		C1---C2---C4---C5---C3---C4 (feature) <= 
+       		
+		it's like rewritting the history of branching 
+		probably used when developer work alone 	   
+		not recommended in cooperation so things don't go in a wrong direction
+        
+		now we can merge feature in master
+		git checkout master
+		git merge feature
+
+		C1---C2---C4---C5---C3---C4 (master) (feature) <= 
+		this keeps everything in linear track 
+
+
+
+revert, reset and checkout
+	checkout  
+		moves the head just like switch but everything still the same
+	revert
+		creates a new commit that undoes the changes from a previous commit/s
+	reset
+		--soft : History changed, HEAD changed, Working directory is not changed.
+		--mixed : History changed, HEAD changed, Working directory changed with unstaged data.
+		--hard : History changed, HEAD changed, Working directory is changed with lost data.
+
+
+
+
+
+

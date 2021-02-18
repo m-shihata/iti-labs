@@ -1,0 +1,34 @@
+1- Person 1
+mkdir vcs
+cd vcs
+git init
+git remote add origin https://github.com/MuhammadShihata/vcs.git
+mkdir day1
+echo 'hello, git!'>> day1/file1.txt
+git add .
+git commit -m "first commit"
+git push --set-upstream origin master
+
+2- Person 2
+git clone https://github.com/MuhammadShihata/vcs.git
+cd vcs
+echo 'hello, there!' >> day1/file1.txt
+git add day1/file1.txt
+git commit -m "added a second line"
+git push
+
+3- Person 1
+git pull
+echo 'a third line!' >> day1/file1.txt
+git add day1/file1.txt
+git commit -m "added a third line"
+git push
+
+4- Person 2
+git pull
+echo 'a 4th line!' >> day1/file1.txt
+git add day1/file1.txt
+git commit -m "added a 4th line"
+git push
+
+git log

@@ -1,0 +1,99 @@
+1-each one create new repo and choose one method git flow  or workflow
+	(if you choose git flow you need to change default branch)
+
+
+    $ mkdir vcs-demo2
+    $ cd vcs-demo2/
+    $ echo "# vcs-demo2" >> README.md
+    $ git init
+    $ git add README.md
+    $ git commit -m "first commit"
+    $ git branch -M development
+    $ git remote add origin https://github.com/MuhammadShihata/vcs-demo2.git
+    $ git push -u origin development
+
+To set a production branch
+    $ git checkout -b production
+    $ git push --set-upstream origin production
+    $ git checkout development
+
+## Contributer ##
+    $ git clone https://github.com/MuhammadShihata/vcs-demo2.git
+
+Now we have 2 repo for each one
+
+
+1-each one create local branch and push it
+    
+    $ git checkout -b configs
+    $ git push --set-upstream origin configs
+
+	- contribute persone will try merge branch of Owner repo
+    ## Contributer ##
+        $ git fetch --all
+        $ git pull origin configs
+
+
+	- owner of repo will merge any branch to main
+        $ git checkout development
+        $ git merge configs
+
+
+2-each one fetch another remote branch
+    ## Contributer ##
+    $ git fetch --all
+
+	- create new local branch and make it remote
+        ## Contributer ##
+        $ git checkout -b feature1
+        $ git push --set-upstream origin feature1
+
+	- contribute person try to get update any un-tracked comments without any merge
+        $ git fetch --all
+        
+
+3- rollback commit from local repo
+	- revert in your local then make new modify and commit it again, but get history before and after that to see what the diff
+	$ git revert e252abb2de355a61608a9bce99e5514196470746
+    
+    - add you note
+    new commit appeard with the revert
+
+4- rollback make last comment same third comment
+	- get history
+        $ git reset e252abb2de355a61608a9bce99e5514196470746
+        $ git log 
+	- add your note
+    no changes because last comment was the third one already but in else cases should remove all commits after the third one
+
+5- rollback to origin/master commit (search)
+	- (roll back to head master)
+
+    $ git reset --hard e252abb2de355a61608a9bce99e5514196470746 (last commit on github)
+
+
+6- log last 5 commit
+    $ git log -5
+
+7 - display graph commit
+    $ git log --graph
+
+8- create file
+    $ touch file1.txt
+	- add it to staging area
+        $ git add file1.txt
+	- modify it
+        $ echo "some text" >> file1.txt
+	- switch to another branch
+          need a commit or a stash to switch
+
+9 -get diff between last comment and first comment
+    $ git diff HEAD 4dabfe274696d37d7e9a8433c811cb5c4f9cec55
+
+bonus ** restrict push to master with open-PR
+on github.com
+    > settings 
+    > branches 
+    > add rule 
+    > add branch name as branch protection rule name 
+    > Check: Require pull request reviews before merging
