@@ -14,12 +14,23 @@
                 id="#addVideoForm"
                 onsubmit="event.preventDefault(); submitAddVideoForm();"
             >
-                <input type="url" name="video_url" placeholder="Video URL" />
-                <input
+                <div>
+
+                    <input 
+                    type="url" 
+                    name="video_url" 
+                    id="videoURL"
+                    placeholder="Video URL" />
+                </div>
+                <div>
+                    <input
                     type="text"
                     name="video_title"
+                    id="videoTitle"
                     placeholder="Video Title"
-                />
+                    />
+                </div>
+                <input type="submit" value="Add video" >   
             </form>
         </div>
         <script src="static/js/loadNavbar.js"></script>

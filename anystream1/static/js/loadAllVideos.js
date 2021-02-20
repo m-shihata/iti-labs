@@ -91,7 +91,7 @@ function deleteVideo(id) {
     .then(res => res.json())
     .then(() => {
         // hide from UI 
-        document.querySelector(`#card${c.id}`).style.display = 'none';
+        document.querySelector(`#card${id}`).style.display = 'none';
     })
     .catch(console.log);
 }

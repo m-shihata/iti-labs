@@ -1,7 +1,7 @@
-function submitAddVideoForm() {
+function submitEditVideoForm() {
     const videoURL = document.querySelector('#videoURL')
     const videoTitle = document.querySelector('#videoTitle')
-    fetch(`https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/78/videos`, {
+    fetch(`https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/78/videos/${sessionStorage.getItem('iti-video-id')}`, {
         method: 'POST',
         redirect: 'follow',
         body: JSON.stringify({
