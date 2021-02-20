@@ -1,0 +1,29 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add Video</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    </head>
+    <body>
+        <div id="c-nav"></div>
+        <div id="flashMessage"></div>
+        <div id="contentWrapper" style="display: none">
+            <form
+                id="#addVideoForm"
+                onsubmit="event.preventDefault(); submitAddVideoForm();"
+            >
+                <input type="url" name="video_url" placeholder="Video URL" />
+                <input
+                    type="text"
+                    name="video_title"
+                    placeholder="Video Title"
+                />
+            </form>
+        </div>
+        <script src="static/js/loadNavbar.js"></script>
+        <script src="static/js/adminAccessLimit.js"></script>
+        <script src="static/js/submitAddVideoForm.js"></script>
+    </body>
+</html>

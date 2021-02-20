@@ -1,0 +1,39 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edit Video</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    </head>
+    <body>
+        <div id="c-nav"></div>
+        <div id="flashMessage"></div>
+        <div id="contentWrapper" style="display: none">
+            <form
+                id="#editVideoForm"
+                onsubmit="event.preventDefault(); submitAddVideoForm();"
+            >
+                <div>
+                    <input type="number" id="videoId" disabled/>
+                </div>
+                <div>
+                    <input type="url" name="video_url" id="videoURL" placeholder="Video URL" />
+                </div>
+                <div>
+                    <input
+                        type="text"
+                        name="video_title"
+                        id ="VideoTitle"
+                        placeholder="Video Title"
+                    />
+                </div>
+                <input type="submit" value="Submit Changes">
+            </form>
+        </div>
+        <script src="static/js/loadNavbar.js"></script>
+        <script src="static/js/adminAccessLimit.js"></script>
+        <script src="static/js/loadOneVideo.js"></script>
+        <script src="static/js/submitEditVideoForm.js"></script>
+    </body>
+</html>
