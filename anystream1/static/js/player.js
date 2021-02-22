@@ -32,8 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            playPause();
-
             fetch(data.url.subtitles[0], {
                 headers : { 
                     'Content-Type': 'application/json',
