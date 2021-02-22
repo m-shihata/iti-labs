@@ -1,0 +1,267 @@
+/**********************************/
+/*   Controls layer positioning & sizing  */
+/**************************************************************************/
+.player {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+}
+
+.sizing-wrapper {
+    font-size: .7em;
+}
+
+#video,
+.controls-layer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 100%;
+    width: 100%;
+}
+
+.customized-controls {
+    position: absolute;
+    inset: 0px;
+    overflow: hidden;
+
+}
+
+.top, .middle, .bottom {
+    position: absolute;
+    width: 100%;
+}
+
+.top {
+    top: 0;
+}
+
+.middle {
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.bottom {
+    bottom: 0;
+}
+
+/* .auto-hide {
+    visibility: hidden;
+} */
+
+
+
+
+/*****************/
+/*   Subtitles   */
+/**************************************************************************/
+
+#subtitles {
+    font-size: 4em;
+    font-weight: bold;
+}
+
+
+/***************/
+/*   seekbar   */
+/**************************************************************************/
+
+#seekbarContainer {
+    display: flex;
+    align-items: center;
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+#seekbar {
+    cursor: pointer;
+    position: relative;
+    margin-right: 2.5em;
+    height: 3.3em;
+}
+
+#seekbarLower,
+#seekbarLoaded,
+#seekbarUpper,
+#seekbarThumb,
+#seekbarTimeRemaining {
+    position: absolute;
+    top: 50%;
+}
+
+#seekbarLower,
+#seekbarLoaded,
+#seekbarUpper {
+    transform: translate(0, -50%);
+    height: .4em;
+    background: #5b5b5b;
+    will-change: height;
+}
+
+
+#seekbar:hover #seekbarLower,
+#seekbar:hover #seekbarLoaded,
+#seekbar:hover #seekbarUpper {
+    height: .75em;
+    transform: translate(0, -50%);
+}
+
+#seekbarUpper,
+#seekbarThumb {
+    background-color: #e50914;
+}
+
+#seekbarLower {
+    width: 100%;
+    background-color: #5b5b5b;
+}
+
+#seekbarLoaded {
+    background-color:rgba(255,255,255,.2)
+}
+
+
+#seekbarThumb {
+    height: 2.3em;
+    width: 2.3em;
+    margin: -1.15em;
+    border-radius: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+#seekbarTimeRemainingContainer {
+    font-size: 0.86537em;
+}
+
+#seekbarRemainingTime {
+    font-size: 1.8em;
+}
+
+
+
+
+
+
+
+/****************/
+/*   Controls   */
+/**************************************************************************/
+.controls {
+    padding-right: .9em;
+}
+
+.ctrl-btn {
+    box-sizing: border-box;
+    border: 3px solid transparent;
+    border-radius: .3em;
+    width: 3.4em;
+    height: 3.6em;
+    padding: 0 0 .6em 0;
+    font-size: 2.8em;
+    display: flex;
+    flex: 0 1 auto;
+    justify-content: center;
+    align-items: center;
+    fill: #fff;
+    background: 0 0;
+    color: white;
+}
+
+.topctrl-btn {
+    margin: 2.2em;
+    font-size: 2.2em;
+    padding: 0;
+}
+
+
+#backBtn {
+    height: .8em;
+    width: .8em;
+}
+
+#backBtnContainer:hover h3.hover-text:after {
+    content: 'Back to Browse';
+}
+
+.ctrl-btn img {
+    font-size: 1.1em;
+    height: 1.6em;
+    width: 1.6em;
+}
+
+.ctrl-btn img:hover {
+    transform: scale(1.2);
+    transition-duration: 0.5s; 
+}
+
+.ctrl-btn::selection {
+    outline: 44px solid white;
+    border-radius: .3em;
+}
+
+#titleContainer {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    box-sizing: border-box;
+    margin: 0 1.5em;
+    overflow: hidden;
+    padding: 0 0 1.68em 0;
+}
+
+#title {
+    font-size: 2.2em;
+    padding: 0;
+    margin: 0 .5em 0 0;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+
+
+
+
+
+/**************/
+/*   Loader   */
+/**************************************************************************/
+
+.nfLoader,
+.nfLoader::after {
+    display: absolute;
+    width: 50px;
+    height: 50px;
+}
+
+.nfLoader::after {
+    content: "";
+    background-image: url(../imgs/site-spinner.png);
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-size: 100%;
+    position: absolute;
+    animation: loader-spin 1s linear infinite;
+}
+
+@keyframes loader-spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* overwrite bootstrap */
+.popover {
+    max-width: none;       
+    display: flex;
+    margin-bottom: -.5em;
+    padding: 1em;
+    background-color: #141414 !important;
+    font-size: 1em;
+    border-radius: .5em;
+}
+

@@ -1,12 +1,25 @@
 function submitEditVideoForm() {
-    const videoURL = document.querySelector('#videoURL')
-    const videoTitle = document.querySelector('#videoTitle')
-    fetch(`https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/78/videos/${sessionStorage.getItem('iti-video-id')}`, {
+    const title = document.querySelector('#title');
+    const id = document.querySelector('#id');
+    const type = document.querySelector('#type');
+    const category = document.querySelector('#category');
+    const images = document.querySelector('#images');
+    const sources = document.querySelector('#sources');
+    const subtitles = document.querySelector('#subtitles');
+
+    fetch(`https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/80/videos/${sessionStorage.getItem('iti-video-id')}`, {
         method: 'POST',
         redirect: 'follow',
         body: JSON.stringify({
-            "url": videoURL.value,
-            "title": videoTitle.value
+            title: title.value,
+            url: {
+                id: id.value,
+                type: type.value,
+                category: category.value,
+                images: parse(images.value),
+                sources: parse(sources.value),
+                subtitles: parse(subtitles.value)
+            }
         }),
         headers: {
             "content-type":"application/json",
@@ -20,9 +33,17 @@ function submitEditVideoForm() {
             flash.innerHTML = data.error
         } else if (data.success) {
             flash.innerHTML = data.success;
-            videoURL.value = '';
-            videoTitle.value = '';
+            title.value = '';
+            id.value = '';
+            category.value = '';
+            type.value = '';
+            images.value = '';
+            sources.value = '';
         }  
     })
     .catch(console.log);
+}
+
+function parse(s) {
+    return s.substr(1, s.length-2).split(/\s*,\s*/);
 }

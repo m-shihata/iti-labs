@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" style="font-family: sans-serif;">
+    <g transform="translate(3, 3)">
+        <g stroke-width="2" fill="transparent" stroke="white">
+            <circle cx="11" cy="11" r="10"></circle>
+        </g>
+        <text font-size="14" font-weight="bold" fill="white">
+            <tspan x="7" y="16">?</tspan>
+        </text>
+    </g>
+</svg>

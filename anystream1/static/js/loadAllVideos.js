@@ -1,7 +1,7 @@
 // set intial token
 if (!sessionStorage.getItem('iti-as1-login')) {
     
-    fetch("https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/78/login", {
+    fetch("https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/80/login", {
         method: 'POST',
         body: JSON.stringify({ 
             "username": 'dummy', 
@@ -27,11 +27,12 @@ if (!sessionStorage.getItem('iti-as1-login')) {
 }
 
 function loadAllVideos() {
+    
     const flash = document.querySelector('#flashMessage');
     const allVideos = document.querySelector('#allVideos');
     allVideos.innerHTML = '<div><span class="h3">Videos are Loading...</span><span class="spinner-border"></span></div>'
 
-    fetch("https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/78/videos/", {
+    fetch("https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/80/videos/", {
         redirect: 'follow',
         headers: {
             "content-type":"application/json",
@@ -50,7 +51,7 @@ function loadAllVideos() {
                     loadCard(el);
                 });
             } else {
-                for(let i = data.length - 1; i !== 0; i--) {
+                for(let i = data.length - 1; i > -1; i--) {
                     loadCard(data[i]);
                 }
             }
@@ -58,19 +59,28 @@ function loadAllVideos() {
         }
     })
     .catch(console.log)
+    
 }
 
 
-function loadCard(c) {
-    div = document.createElement('div') 
-    div.setAttribute('id', `card${c.id}`)
-    div.innerHTML =
-            `<span class="h1">${c.id}: ${c.title}</span>` +
-            ( sessionStorage.getItem('iti-as1-login') === 'admin' ? 
-            (`<button class="btn btn-sm btn-outline-primary" onclick="editVideo(${c.id});">Edit</button>` +
-            `<button class="btn btn-sm btn-outline-danger" onclick="deleteVideo(${c.id});">Delete</button>`) : '') +
-            `<div><img src=${c.url}></div>`;
-    allVideos.appendChild(div)
+function loadCard(data) {
+    for (let i = 0; i < videosNum; i++ ) { // just for styling 
+        div = document.createElement('div') 
+        div.setAttribute('id', `card${data.id}`)
+        div.setAttribute('class', 'mt-5')
+        div.innerHTML =
+                `<div class="h5 mb-2">${data.title}</div>` +
+                `<div><img class="rounded" onclick="openInPlayer(${data.id})" style="width: 250px" src=${data.url.images[0]}></div>`+
+                ( sessionStorage.getItem('iti-as1-login') === 'admin' ? 
+                (`<div><button class="btn btn-sm btn-outline-secondary mr-2 mt-2" onclick="editVideo(${data.id});">Edit</button>` +
+                `<button class="btn btn-sm btn-outline-secondary mt-2" onclick="deleteVideo(${data.id});">Delete</button></div>`) : '');
+        allVideos.appendChild(div)
+    }
+}
+
+function openInPlayer(id) {
+    sessionStorage.setItem('iti-video-id', id);
+    location.href = 'player.html';
 }
 
 function editVideo(id) {
@@ -80,7 +90,7 @@ function editVideo(id) {
 
 function deleteVideo(id) {
     // fetch to delete 
-    fetch(`https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/78/videos/${id}`, {
+    fetch(`https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/80/videos/${id}`, {
         method: 'DELETE',
         redirect: 'follow',
         headers: {
@@ -96,5 +106,8 @@ function deleteVideo(id) {
     .catch(console.log);
 }
 
+function parse(s) {
+    return s.substr(1, s.length-2).split(/\s*,\s*/);
+}
 
 // console.log('loadAllVideos.js loaded!')

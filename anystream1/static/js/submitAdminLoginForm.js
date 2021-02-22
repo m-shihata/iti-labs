@@ -6,7 +6,7 @@ function submitAdminLoginForm() {
     // ONLY THE ADMIN ACCOUNT WILL HAS THE ACCESS
     if(username === 'mushihata' || username === 'ahmedd') {
         // server check
-        fetch("https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/78/login", {
+        fetch("https://whispering-journey-12121.herokuapp.com/http://anyservice.imassoft.com/80/login", {
             method: 'POST',
             body: JSON.stringify({ 
                 "username": username, 
@@ -24,15 +24,14 @@ function submitAdminLoginForm() {
                 // define him as an admin
                 sessionStorage.setItem('iti-as1-login', 'admin');
                 sessionStorage.setItem('iti-as1-token', data.token)
+                sessionStorage.setItem('iti-as1-user', username)
                 location.href = 'dashboard.html'
-                flash.innerHTML = "Success Login"
             } else {
-                console.log('no token')
-                flash.innerHTML = "Invalid Username/Password"
+                flash.innerHTML = '<h4 class="text-danger">Invalid Username/Password!</h4>';
             }
         })
         .catch(console.log); 
     } else {
-        document.querySelector('#flashMessage').innerHTML = "Invalid Username/Password"
+        document.querySelector('#flashMessage').innerHTML = '<h4 class="text-danger">Invalid Username/Password!</h4>';
     }
 }
