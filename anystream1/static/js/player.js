@@ -31,10 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     video.currentTime = 0
                 }
             }
-            
-            if (sessionStorage.getItem('iti-as1-login')) {
-                playPause();
-            }
 
             fetch(data.url.subtitles[0], {
                 headers : { 
