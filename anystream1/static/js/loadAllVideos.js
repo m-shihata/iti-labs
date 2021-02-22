@@ -70,7 +70,7 @@ function loadCard(data) {
         div.setAttribute('class', 'mt-5')
         div.innerHTML =
                 `<div class="h5 mb-2">${data.title}</div>` +
-                `<div><img class="rounded" onclick="openInPlayer(${data.id})" style="width: 250px" src=${data.url.images[0]}></div>`+
+                `<div><img class="rounded" onclick="openInPlayer('${data.id}')" style="width: 250px" src=${data.url.images[0]}></div>`+
                 ( sessionStorage.getItem('iti-as1-login') === 'admin' ? 
                 (`<div><button class="btn btn-sm btn-outline-secondary mr-2 mt-2" onclick="editVideo(${data.id});">Edit</button>` +
                 `<button class="btn btn-sm btn-outline-secondary mt-2" onclick="deleteVideo(${data.id});">Delete</button></div>`) : '');
