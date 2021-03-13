@@ -14,8 +14,7 @@ def index(request):
         try:
             # get all todos from database
             todos = Todo.objects.all()
-        except ObjectDoesNotExist:
-            return HttpResponseBadRequest
+
         except Exception as e:
             print(e)
             error = True
@@ -33,9 +32,14 @@ def todo_details(request, id):
         try:
             # get all todos from database
             todo = Todo.objects.get(pk=id)
+
+        except ObjectDoesNotExist:
+            return HttpResponseBadRequest
+
         except Exception as e:
             print(e)
             error = True
+
         finally:
             # if everything ok show todo details
             if not error:
@@ -156,4 +160,5 @@ def delete_todo(request, id):
         finally:
             if not error:
                 messages.success(request, 'Task deleted successfully')
-            return redirect('todo2:index')
+        
+        return redirect('todo2:index')
