@@ -1,0 +1,28 @@
+{% extends 'todo2/layout.html' %}
+
+{% block title %}
+    Tasks
+{% endblock %}
+
+{% block main %}
+<div class="border p-4 rounded shadow-sm col-sm-10 col-md-8 col-lg-6">
+    <div class="d-flex justify-content-between">
+        <span class="h3">{{todo.title}}</span>
+        <span>
+            <a href="{% url 'todo2:update_todo' todo.id %}" class="btn btn-sm btn-primary">Edit</a>
+            <a href="{% url 'todo2:delete_todo' todo.id %}" class="btn btn-sm btn-danger">Delete</a>
+        </span>
+    </div>
+    <div>
+        <div class="lead">Description</div> 
+        {{todo.desc}}
+    </div>
+    <br/>
+    <div>
+        <div class="lead">Completed</div>
+         {{todo.completed}}
+        </div>
+    <br/>
+    <div>Priority<br/> {{todo.priority}}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'todo2/layout.html' %}
+
+{% block title %}
+    Tasks
+{% endblock %}
+
+{% block main %}
+<div class="border p-4 rounded shadow-sm col-sm-10 col-md-8 col-lg-6">
+    <div class="d-flex justify-content-between">
+        <span class="h3">#my_todos</span>
+        <form class="d-inline" action="{% url 'todo2:create_todo' %}" method="GET">
+            <input class="btn btn-sm btn-primary" type="submit" value="New" />
+        </form>
+    </div>
+    <br>
+    <div class="list-group">
+        {% for todo in todos %}
+        <a href="{% url 'todo2:todo_details' todo.id %}" class=" list-group-item list-group-item-action">
+            <span>{{ todo.id }} -</span>
+            <span>{{ todo.title }}</span>
+            
+            <span onclick="event.stopPropagation()">
+
+                <form class="d-inline" action="{% url 'todo2:delete_todo' todo.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </form>
+                
+            </span>
+            <br>
+            <span>{{ todo.desc }}</span> -
+            <span>{{ todo.completed }}</span> - 
+            <span>{{ todo.priority }}</span>
+        </a>
+        {% empty %}
+        <a href="{% url 'todo2:create_todo' %}" class=" list-group-item list-group-item-action text-center">
+            New tasks will be added to this list
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

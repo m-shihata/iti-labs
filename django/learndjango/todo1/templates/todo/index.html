@@ -13,7 +13,7 @@
     <div class="border p-4 rounded shadow col-sm-10 col-md-8 col-lg-6">
         <h3>#my_todos</h3>
         <br>
-        <form action="{% url 'index' %}" method="POST">
+        <form action="{% url 'todo1:index' %}" method="POST">
             {% csrf_token %}
             <div class="form-group d-flex">
                 <input class="form-control from-control-sm mr-2" type="text" name="task" autocomplete="off" />
@@ -24,7 +24,7 @@
             {% for task in tasks %}
             <li class=" list-group-item">
                 <span>{{ task }}</span>
-                <form class="d-inline" action="{% url 'delete_todo' forloop.counter %}" method="GET">
+                <form class="d-inline" action="{% url 'todo1:delete_todo' forloop.counter %}" method="GET">
                     <button type="submit" class="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

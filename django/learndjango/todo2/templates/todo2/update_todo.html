@@ -1,0 +1,33 @@
+{% extends 'todo2/layout.html' %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block main %}
+<div class="border p-4 rounded shadow-sm col-sm-10 col-md-8 col-lg-6">
+    <h3>Edit task</h3>
+    <br>
+    <form method="POST" action="{% url 'todo2:update_todo' id %}" >
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control from-control-sm" type="text" name="title" placeholder="Title" {%if title %}value="{{ title }}"{% endif %} />
+        </div>
+        <div class="form-group">
+            <textarea class="form-control from-control-sm" type="text" name="desc" placeholder="Description (optional)">{%if desc %}{{ desc }}{% endif %}</textarea>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="completed" id="completed" {%if title %}value="on"{% endif %} />
+                <label class="form-check-label" for="completed">Completed</label>
+            </div>
+         </div>
+        <div class="form-group">
+            <label for="priority">Priority</label>
+            <input id="priority" class="form-control-range w-25" type="range" min="0" max="10" name="priority" {%if title %}value="{{ priority }}"{% endif %} />
+        </div>
+        
+        <input class="btn btn-sm btn-primary mt-2" type="submit" value="Save" />
+    </form>
+</div>
+{% endblock %}
