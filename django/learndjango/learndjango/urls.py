@@ -16,6 +16,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -23,4 +25,8 @@ urlpatterns = [
     path('hello/', include('hello.urls', namespace='hello')),
     path('v1/todos/', include('todo1.urls', namespace='todo1')),
     path('v2/todos/', include('todo2.urls', namespace='todo2')),
-]
+    path('netflix/', include('netflix.urls', namespace='netflix')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

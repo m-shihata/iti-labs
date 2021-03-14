@@ -1,0 +1,24 @@
+{% extends 'netflix/layout.html' %}
+
+{% block main %}
+<img src="{{ movie.image_set.all.1.src.url }}" class="card-img-top" alt="...">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text">{{ movie.overview }}</p>
+            <a class="btn btn-sm btn-primary" href="{% url 'netflix:play_movie' movie.id %}">Watch {{ movie.title }}</a>
+            <a class="btn btn-sm btn-secondary" href="{% url 'netflix:update_movie' movie.id %}">Edit {{ movie.title }}</a>
+            <a class="btn btn-sm btn-danger" href="{% url 'netflix:delete_movie' movie.id %}">Delete {{ movie.title }}</a>
+            <p class="card-text"><small class="text-muted">{{ movie.categories.all | join:", " }}</small></p>
+            <p class="card-text">
+                <small class="text-muted">
+                {% if movie.producer %}
+                    Producer: {{ movie.producer.name }} 
+                {% endif %}
+                </small>
+            </p>
+            <p class="card-text"><small class="text-muted">{{ movie.production_year }}</small></p>
+        </div>
+        </div>  
+    </div> 
+{% endblock %}
