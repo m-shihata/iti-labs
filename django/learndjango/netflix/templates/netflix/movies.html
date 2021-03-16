@@ -1,32 +1,29 @@
 {% extends 'netflix/layout.html' %}
 
 {% block main %}
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-5">
     <div class="card-deck row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
     {% for movie in movies %}
         <div class="col mb-5">
             <div class="card shadow-sm">
             <img src="/media/{{ movie.image_set.all | first }}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{ movie.title }}</h5>
-                <p class="card-text">{{ movie.overview | truncatechars:120 }}</p>
-                <p class="card-text"><small class="text-muted">{{ movie.categories.all | join:", " }}</small></p>
-                <p class="card-text">
-                    <small class="text-muted">
-                    {% if movie.producer %}
-                        Producer: {{ movie.producer.name }}
-                    {% endif %}
-                    </small>
-                </p>
-                <p class="card-text"><small class="text-muted">{{ movie.production_year }}</small></p>
-                <a class="btn btn-sm btn-primary" href="{% url 'netflix:retrieve_movie' movie.id %}">See more</a>
+                <h5 class="card-title">{{ movie.title }} {{ movie.production_year }}</h5>
+                <p class="card-text"><small class="text-muted"></small></p>
+                <a class="btn btn-sm btn-primary" href="{% url 'netflix:play_movie' movie.id %}">Watch</a>
+                <a class="btn btn-sm btn-info" href="{% url 'netflix:retrieve_movie' movie.id %}">Details</a>
+                <a class="btn btn-sm btn-secondary" href="{% url 'netflix:update_movie' movie.id %}">Edit</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'netflix:retrieve_movie' movie.id %}">Delete</a>
             </div>
             </div>
         </div> 
-    
-    {% empty %}
-        No movies added yet!
     {% endfor %}
     </div>
+    {% if movies|length == 0 %}
+    <div class="mt-4">
+        <h3 class="h4 text-muted text-center">No movies matches your search!</h3>
+    </div>
+    {% endif %}
+
 </div>
 {% endblock %}

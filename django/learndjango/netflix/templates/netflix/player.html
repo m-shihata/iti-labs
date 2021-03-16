@@ -1,15 +1,13 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <title>{{ movie.name }}</title>
-</head>
-<body class="d-flex justify-content-center" style="background-color: black;">
-    <video controls style="height:100%; outline: none;">
-        {% for src in movie.video_set.all %}
-        <source src="{{ request.scheme }}://{{ request.get_host }}/media/{{ src }}" type="video/mp4">
-        {% endfor %}
-    </video>
-</body>
-</html>
+{% extends 'netflix/layout.html' %}
+
+{% block main %}
+<div class="d-flex container-fluid justify-content-center">
+    <div class="w-100 mt-4">
+        <video controls class="w-100">
+            {% for video in movie.video_set.all %}
+            <source src="{{ request.scheme }}://{{ request.get_host }}{{ video.src.url }}" type="video/mp4" />
+            {% endfor %}
+        </video>
+    </div>
+</div>      
+{% endblock %}

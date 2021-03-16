@@ -1,29 +1,56 @@
 <html class="h-100">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-        <title>{% block title %}NETFLIX{% endblock %}</title>
-    </head>
-    <body class="h-100">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand text-danger font-weight-bolder" href="{% url 'netflix:retrieve_movies' %}">NETFLIX</a>
-              <div class="navbar-nav">
-                <a class="nav-link {%if movies %}active{% endif %}" href="{% url 'netflix:retrieve_movies' %}">Movies</a>
-              </div>
-        </nav>
-        <div class="d-flex flex-column">
-            {% if messages %}
-                <div class="d-flex w-100 justify-content-center messages">
-                    {% for message in messages %}
-                        <div{% if message.tags %} class="w-100 {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}"{% endif %}>{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <title>{{ page_title }}</title>
+</head>
+<body class="h-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand text-danger font-weight-bolder" href="{% url 'netflix:retrieve_movies' %}">NETFLIX</a>
+        {% if perms.netflix.view_movie %}
+        <div class="navbar-nav">
+            <a class="nav-link {%if page_title == 'NETFLIX' %}active{% endif %}" href="{% url 'netflix:retrieve_movies' %}">Movies</a>
+        </div>
+        {% endif %}
+        {% if perms.netflix.add_movie %}
+        <div class="navbar-nav">
+            <a class="nav-link {%if page_title == 'Add movie' %}active{% endif %}" href="{% url 'netflix:create_movie' %}">Add movie</a>
+        </div>
+        {% endif %}
+        {% if not user.is_authenticated %}
+        <div class="navbar-nav">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </div>
+        <div class="navbar-nav">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </div>
+        {% else %}
+        <div class="navbar-nav">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </div>
+        <form class="form-inline mt-2 mt-md-0 ml-auto">
+            <input name="search" class="form-control form-control-sm mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-sm btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+        </form action="{% url 'netflix:retrieve_movies' %}" method="get">
+
+        {% endif %}
+    </nav>
+    <div class="d-flex flex-column">
+        {% if messages %}
+            <div class="d-flex w-100 justify-content-center messages">
+            {% for message in messages %}
+                <div{% if message.tags %} class="w-100 {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+        <div style="margin-top:3rem">
             {% block main %}
             {% endblock %}
         </div>
-    </body>
-    </html>
+    </div>
+</body>
+</html>

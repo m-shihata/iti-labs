@@ -21,3 +21,5 @@ class MovieAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Movie, MovieAdmin)
+admin.site.register(Category)
+admin.site.register(Producer)
