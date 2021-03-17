@@ -14,7 +14,7 @@ class App1 extends Component {
   render() {
     return (
       <div className="App">
-        <p>App 1: with class, constructor and regular functions</p>
+        <p>App1: with class, constructor and regular functions</p>
         <h1>{ this.state.counter }</h1>
         <button onClick={this.handleIncClick}>Add</button>
 
@@ -42,7 +42,7 @@ export class App2 extends Component {
   render() {
     return (
       <div className="App">
-        <p>App3: class, arrow functions to auto-bind them (constructor is removed as short-hand syntax)</p>
+        <p>App2: class, arrow functions to auto-bind them (constructor is removed as short-hand syntax)</p>
         <h1>{ this.state.counter }</h1>
         <button onClick={this.handleIncClick}>Add</button>
       </div>
