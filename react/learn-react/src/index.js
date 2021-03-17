@@ -7,7 +7,9 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <App1 />
+    <hr />
     <App2 />
+    <hr/>
     <App3 />
   </React.StrictMode>,
   document.getElementById('root')
