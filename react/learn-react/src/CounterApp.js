@@ -2,7 +2,7 @@ import './App.css';
 import React, {Component, useState} from 'react'
 
 // Method 1: Same way explained in the lecture
-class App1 extends Component {
+export class Counter1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ class App1 extends Component {
 
 // Just for Remebering
 // Method2: With some shorthandss and arrow functions
-export class App2 extends Component {
+export class Counter2 extends Component {
   // Everything we removed in this example will be done for us
   state = {
     counter: 0
@@ -59,7 +59,7 @@ export class App2 extends Component {
 
 
 // Method3: Using functions and hooks
-export function App3(props) {
+export function Counter3(props) {
   var [counter, setCounter] = useState(0)  
 
   return (
@@ -71,5 +71,3 @@ export function App3(props) {
   );
   // in case of using more logic than get and set a state we will use a reducer
 }
-
-export default App1;

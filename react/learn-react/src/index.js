@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
 import './index.css';
-import App1, {App2, App3} from './App';
+// import { Counter1, Counter2, Counter3, } from './CounterApp';
+import TodoApp from "./TodoApp";
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App1 />
+    <TodoApp />
+    {/* <Counter />
     <hr />
     <App2 />
     <hr/>
-    <App3 />
+    <App3 /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
