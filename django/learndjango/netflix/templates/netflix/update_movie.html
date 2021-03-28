@@ -1,9 +1,30 @@
 {%  extends 'netflix/layout.html' %}
+{% load widget_tweaks %}
+
 {% block title %}Edit{% endblock %}
+
 {% block main %}
-    <form action="{% url 'netflix:update_movie' movie.id %}" method="post">
+<div class="container">
+    <form class="mt-5" action="{% url 'netflix:update_movie' movie.id %}" method="post">  
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save" />
+        {% for field in form %}
+        <div class="form-group">
+            {{field.erros}}
+            {% if field.field.widget.input_type == 'checkbox' %}
+            <div class="form-check">
+                {% render_field field class="form-check-input" %}
+                <label class="orm-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            </div>
+            {% elif field.field.widget.input_type == 'select' %}
+                {{field.label_tag}}
+                {% render_field field class="custom-select" %}
+            {% else %}
+                {{field.label_tag}}
+                {% render_field field class="form-control" %}
+            {% endif %}
+        </div>
+        {% endfor %}
+        <input class="btn btn-primary" type="submit" value="Save" />
     </form>
+</div>
 {% endblock %}

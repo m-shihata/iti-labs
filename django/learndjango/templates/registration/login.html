@@ -1,9 +1,23 @@
 {% extends 'netflix/layout.html' %}
-{% block main %}
+{% load widget_tweaks %}
 
-<form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Login">
+{% block title %}Login{% endblock %}
+{% block main %}
+<div class="container mt-5">
+<div class="display-4">Login</div>
+<form class="mt-5" action="{% url 'login' %}" method="post"> {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    <div class="form-group">
+        {{ field.label_tag }}
+        {% render_field field class="form-control" %}
+        <div class="text-danger"><small>{{ field.errors }}</small></div>
+
+        {% if field.help_text %}
+        <p class="mt-2">{{ field.help_text|safe }}<p>
+        {% endif %}
+    {% endfor %}
+    <input class="btn btn-primary" type="submit" value="Login">
 </form>
+</div>
 {% endblock %}

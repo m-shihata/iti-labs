@@ -1,9 +1,37 @@
 {%  extends 'netflix/layout.html' %}
+{% load widget_tweaks %}
+
 {% block title %}Add Movie{% endblock %}
 {% block main %}
-    <form action="{% url 'netflix:create_movie' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Add" />
+
+
+<div class="container mt-5">
+    <form class="mt-5" action="{% url 'netflix:create_movie' %}" method="post"> {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <div class="invalid-feedback">{{field.erros}}</div>
+            {% if field.field.widget.input_type == 'checkbox' %}
+            <div class="form-check">
+                {% render_field field class="form-check-input" %}
+                <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            </div>
+            {% elif field.field.widget.input_type == 'select' %}
+                {{field.label_tag}}
+                {% render_field field class="custom-select" %}
+            {% else %}
+                {{field.label_tag}}
+                {% render_field field class="form-control" %}
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        {{ inlines  }}
+        {% for formset in inlines %}
+            <table>{{ formset.as_table }}</table>
+        {% endfor %}
+
+        <input class="btn btn-primary" type="submit" value="Add" />
     </form>
+
+</div>
 {% endblock %}

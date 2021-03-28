@@ -12,8 +12,12 @@
                 <p class="card-text"><small class="text-muted"></small></p>
                 <a class="btn btn-sm btn-primary" href="{% url 'netflix:play_movie' movie.id %}">Watch</a>
                 <a class="btn btn-sm btn-info" href="{% url 'netflix:retrieve_movie' movie.id %}">Details</a>
+                {% if perms.netflix.edit_movie %}
                 <a class="btn btn-sm btn-secondary" href="{% url 'netflix:update_movie' movie.id %}">Edit</a>
-                <a class="btn btn-sm btn-danger" href="{% url 'netflix:retrieve_movie' movie.id %}">Delete</a>
+                {% endif %}
+                {% if perms.netflix.delete_movie %}
+                <a class="btn btn-sm btn-danger" href="{% url 'netflix:delete_movie' movie.id %}">Delete</a>
+                {% endif %}
             </div>
             </div>
         </div> 

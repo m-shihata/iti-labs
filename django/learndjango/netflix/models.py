@@ -50,9 +50,10 @@ class Image(models.Model):
         return f"{self.src}"
 
 
+
 class Video(models.Model):
     src = models.FileField(upload_to='netflix/movies/videos')
-    resolutin = models.CharField(max_length=10)
+    resolution = models.CharField(max_length=10)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
