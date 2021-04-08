@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "movie1", 
+        "img": "https://occ-0-1722-1723.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABTkZuZ7z-xQqWl6RTvgXCRTSh_GOBS4Dl14DfGlly3zXc8dwXz67QiDcassgyOF5B-QD3bXuC9f0GKFUS5w-p8VzEYiEKEqybcnZiDiiCriOnMVzje3TagCd2MsW8g.jpg?r=a0a",
+        "desc": "lorem ipsum1"
+
+    },
+    {
+        "id": 2,
+        "name": "movie2", 
+        "img": "https://static.arageek.com/wp-content/uploads/2021/02/Lupin-Netflix-Series-1_443014_highres.jpg",
+        "desc": "lorem ipsum2"
+
+    }
+]

@@ -4,14 +4,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './index.css';
 // import { Counter1, Counter2, Counter3, } from './CounterApp';
 // import TodoApp from "./TodoApp";
-import CalcApp from "./CalcApp"
+// import CalcApp from "./CalcApp"
+import MultiplePagesApp from "./MultiplePagesApp"
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <CalcApp />
+    <MultiplePagesApp />
     {/* 
-    <TodoApp
+    <CalcApp />
+    <TodoApp />
     <Counter />
     <hr />
     <App2 />
